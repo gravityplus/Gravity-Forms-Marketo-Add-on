@@ -1,14 +1,14 @@
 <?php
 /*
 Plugin Name: Gravity Forms Marketo Add-On
-Plugin URI: http://www.seodenver.com
+Plugin URI: https://katz.co/plugins/marketo/
 Description: Integrates Gravity Forms with Marketo allowing form submissions to be automatically sent to your Marketo account
 Version: 1.3.7
 Author: Katz Web Services, Inc.
-Author URI: http://www.katzwebservices.com
+Author URI: https://katz.co
 
 ------------------------------------------------------------------------
-Copyright 2013 Katz Web Services, Inc.
+Copyright 2014 Katz Web Services, Inc.
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
