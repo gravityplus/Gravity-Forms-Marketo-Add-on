@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms Marketo Add-On
 Plugin URI: https://katz.co/plugins/marketo/
 Description: Integrates Gravity Forms with Marketo allowing form submissions to be automatically sent to your Marketo account
-Version: 1.3.7
+Version: 1.3.7.1
 Author: Katz Web Services, Inc.
 Author URI: https://katz.co
 
@@ -133,8 +133,10 @@ class GFMarketo {
 
         add_filter('gform_pre_render', array('GFMarketo', 'merge_tag_gform_pre_render_filter'), 1, 4);
 
-        add_action('gform_enqueue_scripts', array('GFMarketo', 'add_munchkin_js'), 2);
+        add_action('gform_enqueue_scripts', array('GFMarketo', 'add_munchkin_js'), 10, 2 );
+        
         add_action('wp_footer', array('GFMarketo', 'add_munchkin_js'));
+        
 
     }
 
@@ -173,12 +175,11 @@ class GFMarketo {
                 if(floatval($feed['id']) !== floatval($form['id'])) { continue; }
             }
         }
-    ?>
-<script>
-    document.write(unescape("%3Cscript src='https://ssl-munchkin.marketo.net/js/munchkin.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script>Munchkin.init('<?php echo self::get_munchkin_id(); ?>');</script>
-        <?php
+        
+        // Enqueue munchkin.js & init (since 1.3.7.1)
+        wp_enqueue_script( 'munchkin-js', 'https://ssl-munchkin.marketo.net/js/munchkin.js', array('jquery'), '44633', true );
+        wp_enqueue_script( 'marketo-js', plugin_dir_path( __FILE__ ) . 'includes/marketo.js', array('munchkin-js'), '', true );
+        wp_localize_script( 'marketo-js', 'marketo_vars', array( 'munchkin_id' => self::get_munchkin_id() ) );
 
         do_action('gf_marketo_add_munchkin_js');
     }
@@ -247,7 +248,7 @@ class GFMarketo {
     }
 
 
-    function merge_tag_gform_pre_render_filter($form){
+    static function merge_tag_gform_pre_render_filter($form){
         foreach($form['fields'] as &$field) {
             $field['defaultValue'] = self::replace_merge_tag($field['defaultValue']);
         }
@@ -267,7 +268,7 @@ class GFMarketo {
      * @param  array $form GF Form
      * @return array       modified $lead
      */
-    function gform_entry_post_save($lead, $form) {
+    static function gform_entry_post_save($lead, $form) {
 
         if(!self::get_setting('fill_munchkin')) { return $lead; }
 
@@ -336,7 +337,7 @@ EOD;
 
     //--------------   Automatic upgrade ---------------------------------------------------
 
-    function settings_link( $links, $file ) {
+    static function settings_link( $links, $file ) {
         static $this_plugin;
         if( ! $this_plugin ) $this_plugin = plugin_basename(__FILE__);
         if ( $file == $this_plugin ) {
@@ -1769,7 +1770,7 @@ EOD;
         }
     }
 
-    private function clean_utf8($string) {
+    private static function clean_utf8($string) {
 
         if(function_exists('mb_convert_encoding') && !seems_utf8($string)) {
             $string = mb_convert_encoding($string, "UTF-8", 'auto');
