@@ -1,7 +1,7 @@
 === Marketo Gravity Forms Add-on ===
 Tags: marketo, gravity forms, forms, gravity, form, crm, gravity form, small business, business, marketing, e-commerce
-Requires at least: 3.2
-Tested up to: 3.7
+Requires at least: 3.3
+Tested up to: 3.8
 Stable tag: trunk
 Contributors: katzwebdesign, katzwebservices
 Donate link:https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=zackkatz%40gmail%2ecom&item_name=Gravity%20Forms%20Marketo&no_shipping=0&no_note=1&tax=0&currency_code=USD&lc=US&bn=PP%2dDonationsBF&charset=UTF%2d8
@@ -45,6 +45,10 @@ Well of course it does.
 This plugin is released under a GPL license.
 
 == Changelog ==
+
+= 1.3.7.1 on January 27, 2014 = 
+* Fixed: Issue with Firefox not sending Marketo data
+* Fixed: Static PHP warnings
 
 = 1.3.7 =
 * Fixed: Configuration settings have restored working/not working messages and added error messages.
@@ -90,6 +94,10 @@ This plugin is released under a GPL license.
 * Liftoff!
 
 == Upgrade Notice ==
+
+= 1.3.7.1 on January 27, 2014 = 
+* Fixed: Issue with Firefox not sending Marketo data
+* Fixed: Static PHP warnings
 
 = 1.3.7 =
 * Fixed: Configuration settings have restored working/not working messages and added error messages.
