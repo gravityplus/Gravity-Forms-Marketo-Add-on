@@ -46,6 +46,9 @@ This plugin is released under a GPL license.
 
 == Changelog ==
 
+= 1.3.7.2 on January 27, 2014 =
+* Fixed: Path the new JS file
+
 = 1.3.7.1 on January 27, 2014 = 
 * Fixed: Issue with Firefox not sending Marketo data
 * Fixed: Static PHP warnings
@@ -94,6 +97,9 @@ This plugin is released under a GPL license.
 * Liftoff!
 
 == Upgrade Notice ==
+
+= 1.3.7.2 on January 27, 2014 =
+* Fixed: Path the new JS file
 
 = 1.3.7.1 on January 27, 2014 = 
 * Fixed: Issue with Firefox not sending Marketo data

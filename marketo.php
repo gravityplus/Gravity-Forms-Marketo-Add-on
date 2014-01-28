@@ -3,7 +3,7 @@
 Plugin Name: Gravity Forms Marketo Add-On
 Plugin URI: https://katz.co/plugins/marketo/
 Description: Integrates Gravity Forms with Marketo allowing form submissions to be automatically sent to your Marketo account
-Version: 1.3.7.1
+Version: 1.3.7.2
 Author: Katz Web Services, Inc.
 Author URI: https://katz.co
 
@@ -35,7 +35,7 @@ class GFMarketo {
     private static $path = "gravity-forms-marketo/marketo.php";
     private static $url = "http://www.gravityforms.com";
     private static $slug = "gravity-forms-marketo";
-    private static $version = "1.3.7";
+    private static $version = "1.3.7.2";
     private static $min_gravityforms_version = "1.3.9";
     private static $is_debug = NULL;
     private static $settings = array(
@@ -134,9 +134,9 @@ class GFMarketo {
         add_filter('gform_pre_render', array('GFMarketo', 'merge_tag_gform_pre_render_filter'), 1, 4);
 
         add_action('gform_enqueue_scripts', array('GFMarketo', 'add_munchkin_js'), 10, 2 );
-        
+
         add_action('wp_footer', array('GFMarketo', 'add_munchkin_js'));
-        
+
 
     }
 
@@ -175,10 +175,10 @@ class GFMarketo {
                 if(floatval($feed['id']) !== floatval($form['id'])) { continue; }
             }
         }
-        
+
         // Enqueue munchkin.js & init (since 1.3.7.1)
         wp_enqueue_script( 'munchkin-js', 'https://ssl-munchkin.marketo.net/js/munchkin.js', array('jquery'), '44633', true );
-        wp_enqueue_script( 'marketo-js', plugin_dir_path( __FILE__ ) . 'includes/marketo.js', array('munchkin-js'), '', true );
+        wp_enqueue_script( 'marketo-js', plugins_url('includes/marketo.js', __FILE__), array('munchkin-js'), '', true );
         wp_localize_script( 'marketo-js', 'marketo_vars', array( 'munchkin_id' => self::get_munchkin_id() ) );
 
         do_action('gf_marketo_add_munchkin_js');
