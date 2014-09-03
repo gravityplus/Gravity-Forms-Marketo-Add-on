@@ -1002,10 +1002,10 @@ EOD;
                     <select id="gf_marketo_list" name="gf_marketo_list" onchange="SelectList(jQuery(this).val());">
                         <option value=""><?php _e("Select a Marketo Campaign", "gravity-forms-marketo"); ?></option>
                     <?php
-                    foreach ($campaigns as $campaignname => $campaignid){
-                        $selected = $campaignid == $config["meta"]["contact_list_id"] ? "selected='selected'" : "";
+                    $curr_contact_list_id = isset( $config["meta"]["contact_list_id"] ) ? $config["meta"]["contact_list_id"] : '';
+                    foreach ($campaigns as $campaignname => $campaignid) {
                         ?>
-                        <option value="<?php echo esc_html($campaignid) . "|:|" . esc_html($campaignname) ?>" <?php echo $selected ?>><?php echo esc_html($campaignname) ?></option>
+                        <option value="<?php echo esc_html($campaignid) . "|:|" . esc_html($campaignname) ?>" <?php selected( $campaignid ,  $curr_contact_list_id, true ); ?>><?php echo esc_html($campaignname) ?></option>
                         <?php
                     }
                     ?>
@@ -1035,11 +1035,9 @@ EOD;
                 <select id="gf_marketo_form" name="gf_marketo_form" onchange="SelectForm(jQuery('#gf_marketo_list').val(), jQuery(this).val());">
                 <option value=""><?php _e("Select a form", "gravity-forms-marketo"); ?> </option>
                 <?php
-
-                foreach($forms as $form){
-                    $selected = absint($form->id) == $config["form_id"] ? "selected='selected'" : "";
-                    ?>
-                    <option value="<?php echo absint($form->id) ?>"  <?php echo $selected ?>><?php echo esc_html($form->title) ?></option>
+                $curr_form_id = isset( $config["form_id"] ) ? $config["form_id"] : '';
+                foreach($forms as $form) {  ?>
+                    <option value="<?php echo absint($form->id) ?>"  <?php selected( absint($form->id), $curr_form_id, true ); ?>><?php echo esc_html($form->title) ?></option>
                     <?php
                 }
                 ?>
