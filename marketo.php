@@ -834,7 +834,7 @@ EOD;
         return $works;
     }
 
-    function r($content, $die = false) {
+    static function r($content, $die = false) {
         echo '<pre>'.print_r($content, true).'</pre>';
         if($die) { die(); }
     }
