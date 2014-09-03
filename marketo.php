@@ -250,7 +250,9 @@ class GFMarketo {
 
     static function merge_tag_gform_pre_render_filter($form){
         foreach($form['fields'] as &$field) {
-            $field['defaultValue'] = self::replace_merge_tag($field['defaultValue']);
+            if( array_key_exists( 'defaultValue',  $field ) ) {
+                 $field['defaultValue'] = self::replace_merge_tag($field['defaultValue'] );
+            }
         }
         return $form;
     }
