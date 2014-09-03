@@ -116,7 +116,7 @@ class GFMarketo {
         }
         else{
              //handling post submission.
-            add_action("gform_post_submission", array('GFMarketo', 'export'), 10, 2);
+            add_action( 'gform_after_submission', array( 'GFMarketo', 'export'), 10, 2);
         }
 
         add_action('gform_entry_info', array('GFMarketo', 'entry_info_link_to_marketo'), 1, 2);
