@@ -46,10 +46,13 @@ This plugin is released under a GPL license.
 
 == Changelog ==
 
+= 1.3.7.3 on September 4, 2014 =
+* Fixed: saving custom fields on new feeds
+
 = 1.3.7.2 on January 27, 2014 =
 * Fixed: Path the new JS file
 
-= 1.3.7.1 on January 27, 2014 = 
+= 1.3.7.1 on January 27, 2014 =
 * Fixed: Issue with Firefox not sending Marketo data
 * Fixed: Static PHP warnings
 
@@ -98,10 +101,13 @@ This plugin is released under a GPL license.
 
 == Upgrade Notice ==
 
+= 1.3.7.3 on September 4, 2014 =
+* Fixed: saving custom fields on new feeds
+
 = 1.3.7.2 on January 27, 2014 =
 * Fixed: Path the new JS file
 
-= 1.3.7.1 on January 27, 2014 = 
+= 1.3.7.1 on January 27, 2014 =
 * Fixed: Issue with Firefox not sending Marketo data
 * Fixed: Static PHP warnings
 
