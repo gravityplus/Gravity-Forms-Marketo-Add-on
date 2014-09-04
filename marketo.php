@@ -936,8 +936,8 @@ EOD;
 
             $field_map['CustomFields'] = array();
 
-            if(isset($_POST['marketo_custom_field'])) {
-                foreach((array)$_POST['marketo_custom_field'] as $key => $value) {
+            if( isset($_POST['marketo_custom_field'] ) ) {
+                foreach( (array)$_POST['marketo_custom_field'] as $key => $value) {
                     if(!empty($key)) {
                         $field_map['CustomFields'][esc_attr($key)] = stripslashes($value);
                     }
@@ -1113,11 +1113,10 @@ EOD;
                     </div>
 
                     <script>
-                        jQuery(document).ready(function($){
-                            $('.marketo_custom_field_name').on('focus ready change', function() {
-                                $('td select', $(this).parents('tr')).attr('name', 'marketo_custom_field['+$(this).val()+']').attr('id', 'marketo_custom_field_'+$(this).val().replace(/\W/, '-'));
-                            });
-                        });
+                        function marketoUpdateCFName( inputObj ) {
+                            jQuery('td select', jQuery( inputObj ).parents('tr')).attr('name', 'marketo_custom_field['+ jQuery( inputObj ).val()+']').attr('id', 'marketo_custom_field_'+ jQuery( inputObj ).val().replace(/\W/, '-') );
+                        }
+
                         <?php
                         if(!empty($config["form_id"])){
                             ?>
@@ -1545,14 +1544,14 @@ EOD;
         if(isset($config["meta"]) && isset($config["meta"]["field_map"]) && isset($config["meta"]["field_map"]['CustomFields'])) {
             foreach((array)$config['meta']['field_map']['CustomFields'] as $key => $value) {
                 $field_list = self::get_mapped_field_list($key, $value, $form_fields, 'marketo_custom_field['.$key.']');
-                $str .= "<tr class='$error_class'><th scope='row' class='marketo_field_cell' id='marketo_map_field_{$key}_th'><input class='marketo_custom_field_name' value='{$key}' /></th><td class='marketo_field_cell'>" . $field_list . "</td></tr>";
+                $str .= "<tr class='$error_class'><th scope='row' class='marketo_field_cell' id='marketo_map_field_{$key}_th'><input class='marketo_custom_field_name' value='{$key}' onchange='marketoUpdateCFName( this );' /></th><td class='marketo_field_cell'>" . $field_list . "</td></tr>";
             }
         }
 
-        $field_list = self::get_mapped_field_list('', '', $form_fields);
+        $field_list = self::get_mapped_field_list('', '', $form_fields );
         $i = 1;
         while($i <= 5) {
-            $str .= "<tr class='$error_class'><th scope='row' class='marketo_field_cell' id='marketo_map_field_custom_{$i}_th'><input class='marketo_custom_field_name' value='' placeholder='";
+            $str .= "<tr class='$error_class'><th scope='row' class='marketo_field_cell' id='marketo_map_field_custom_{$i}_th'><input class='marketo_custom_field_name' value='' onchange='marketoUpdateCFName( this );' placeholder='";
             $str .= __('Add a Custom Field', 'market-gravity-forms');
             $str .= "' /></th><td class='marketo_field_cell'>" . $field_list . "</td></tr>";
             $i++;
